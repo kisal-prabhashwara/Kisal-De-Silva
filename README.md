@@ -1,502 +1,141 @@
+<div align="center">
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kisal-De-Silva | Repository</title>
-
-<style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-:root {
-    --bg: #0d1117;
-    --panel: #161b22;
-    --border: #30363d;
-    --text: #e6edf3;
-    --muted: #9198a1;
-    --blue: #4493f8;
-    --green: #238636;
-}
-
-body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
-                 Helvetica, Arial, sans-serif;
-    font-size: 14px;
-}
-
-/* Top navigation */
-.topbar {
-    min-height: 64px;
-    display: flex;
-    align-items: center;
-    gap: 18px;
-    padding: 14px 24px;
-    border-bottom: 1px solid var(--border);
-}
-
-.github-logo {
-    width: 34px;
-    height: 34px;
-    border-radius: 50%;
-    background: white;
-    color: #0d1117;
-    display: grid;
-    place-items: center;
-    font-size: 22px;
-    font-weight: bold;
-}
-
-.username {
-    font-weight: 600;
-    color: var(--text);
-    text-decoration: none;
-}
-
-.search {
-    margin-left: auto;
-    padding: 9px 14px;
-    width: 220px;
-    border: 1px solid var(--border);
-    border-radius: 7px;
-    color: var(--muted);
-    background: transparent;
-}
-
-/* Repository navigation */
-.nav {
-    display: flex;
-    gap: 24px;
-    padding: 0 24px;
-    border-bottom: 1px solid var(--border);
-    overflow-x: auto;
-}
-
-.nav a {
-    color: var(--text);
-    text-decoration: none;
-    padding: 16px 0;
-    white-space: nowrap;
-    border-bottom: 2px solid transparent;
-}
-
-.nav a.active {
-    border-bottom-color: #fd8c73;
-}
-
-/* Main content */
-.container {
-    max-width: 1250px;
-    margin: 30px auto;
-    padding: 0 24px;
-}
-
-.repo-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 16px;
-    padding-bottom: 22px;
-    border-bottom: 1px solid var(--border);
-}
-
-.repo-title {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 22px;
-}
-
-.repo-icon {
-    font-size: 27px;
-}
-
-.badge {
-    border: 1px solid var(--border);
-    border-radius: 20px;
-    color: var(--muted);
-    font-size: 12px;
-    padding: 3px 9px;
-    font-weight: normal;
-}
-
-.actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-}
-
-button {
-    cursor: pointer;
-    color: var(--text);
-    background: var(--panel);
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    padding: 8px 12px;
-    font-size: 13px;
-    font-weight: 600;
-}
-
-button:hover {
-    background: #30363d;
-}
-
-button.selected {
-    color: #7ee787;
-    border-color: #238636;
-}
-
-/* Repository description */
-.description {
-    color: var(--muted);
-    margin: 20px 0;
-    line-height: 1.7;
-}
-
-/* Main two-column layout */
-.layout {
-    display: grid;
-    grid-template-columns: minmax(0, 2fr) minmax(240px, 1fr);
-    gap: 22px;
-    margin-top: 22px;
-}
-
-.panel {
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    overflow: hidden;
-    margin-bottom: 20px;
-}
-
-.panel-title {
-    padding: 15px;
-    border-bottom: 1px solid var(--border);
-    font-weight: 600;
-    background: rgba(255,255,255,0.015);
-}
-
-.file-row {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 13px 16px;
-    border-bottom: 1px solid #21262d;
-    text-decoration: none;
-    color: var(--text);
-}
-
-.file-row:last-child {
-    border-bottom: none;
-}
-
-.file-row:hover {
-    background: #161b22;
-}
-
-.file-icon {
-    color: var(--muted);
-}
-
-.file-name {
-    flex: 1;
-    overflow-wrap: anywhere;
-}
-
-.file-message {
-    color: var(--muted);
-    font-size: 12px;
-}
-
-/* README */
-.readme {
-    padding: 26px;
-    line-height: 1.8;
-}
-
-.readme h2 {
-    font-size: 23px;
-    margin-bottom: 14px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid var(--border);
-}
-
-.readme p {
-    margin-bottom: 14px;
-}
-
-.readme a {
-    color: var(--blue);
-}
-
-.readme h3 {
-    margin: 20px 0 8px;
-}
-
-/* Sidebar */
-.sidebar-section {
-    padding: 18px;
-    border-bottom: 1px solid var(--border);
-}
-
-.sidebar-section:last-child {
-    border-bottom: none;
-}
-
-.sidebar-section h3 {
-    margin-bottom: 12px;
-    font-size: 15px;
-}
-
-.sidebar-section p {
-    color: var(--muted);
-    line-height: 1.7;
-}
-
-.language-bar {
-    height: 8px;
-    border-radius: 5px;
-    background: linear-gradient(
-        to right,
-        #f1e05a 0% 60%,
-        #3572a5 60% 85%,
-        #563d7c 85% 100%
-    );
-    margin: 12px 0;
-}
-
-/* Footer */
-footer {
-    text-align: center;
-    color: var(--muted);
-    border-top: 1px solid var(--border);
-    padding: 25px;
-    margin-top: 35px;
-    font-size: 12px;
-}
-
-@media (max-width: 760px) {
-    .topbar {
-        padding: 12px;
-    }
-
-    .search {
-        display: none;
-    }
-
-    .nav {
-        padding: 0 14px;
-        gap: 18px;
-    }
-
-    .container {
-        padding: 0 14px;
-        margin-top: 20px;
-    }
-
-    .layout {
-        grid-template-columns: 1fr;
-    }
-
-    .repo-title {
-        font-size: 19px;
-    }
-
-    .file-message {
-        display: none;
-    }
-}
-</style>
-</head>
-
-<body>
-
-<header class="topbar">
-    <div class="github-logo">⌘</div>
-    <a class="username" href="#">kisal-prabhashwara</a>
-    <input class="search" type="search" placeholder="Search repositories...">
-</header>
-
-<nav class="nav">
-    <a href="#" class="active">〈〉 Code</a>
-    <a href="#issues">Issues</a>
-    <a href="#pulls">Pull requests</a>
-    <a href="#actions">Actions</a>
-    <a href="#projects">Projects</a>
-    <a href="#wiki">Wiki</a>
-    <a href="#security">Security</a>
-    <a href="#settings">Settings</a>
-</nav>
-
-<main class="container">
-
-    <section class="repo-header">
-        <div class="repo-title">
-            <span class="repo-icon">🟠</span>
-            <strong>Kisal-De-Silva</strong>
-            <span class="badge">Public</span>
-        </div>
-
-        <div class="actions">
-            <button id="watchBtn">◉ Watch <span id="watchCount">0</span></button>
-            <button id="starBtn">☆ Star <span id="starCount">0</span></button>
-            <button id="forkBtn">⑂ Fork <span id="forkCount">0</span></button>
-        </div>
-    </section>
-
-    <p class="description">
-        Welcome to my repository! Explore my projects, source code,
-        experiments, and development journey.
-    </p>
-
-    <section class="layout">
-
-        <div class="main-column">
-
-            <div class="panel">
-                <div class="panel-title">📁 Repository files</div>
-
-                <a class="file-row" href="#readme">
-                    <span class="file-icon">📁</span>
-                    <span class="file-name">src</span>
-                    <span class="file-message">Source code</span>
-                </a>
-
-                <a class="file-row" href="#assets">
-                    <span class="file-icon">📁</span>
-                    <span class="file-name">assets</span>
-                    <span class="file-message">Images and resources</span>
-                </a>
-
-                <a class="file-row" href="#index">
-                    <span class="file-icon">📄</span>
-                    <span class="file-name">index.html</span>
-                    <span class="file-message">Main page</span>
-                </a>
-
-                <a class="file-row" href="#style">
-                    <span class="file-icon">🎨</span>
-                    <span class="file-name">style.css</span>
-                    <span class="file-message">Website styling</span>
-                </a>
-
-                <a class="file-row" href="#readme">
-                    <span class="file-icon">📘</span>
-                    <span class="file-name">README.md</span>
-                    <span class="file-message">Project documentation</span>
-                </a>
-            </div>
-
-            <div class="panel" id="readme">
-                <div class="panel-title">📖 README.md</div>
-
-                <div class="readme">
-                    <h2>👋 Welcome to Kisal-De-Silva</h2>
-
-                    <p>
-                        Hi! I'm Kisal, and this is my personal development
-                        space. Here you'll find my projects, coding
-                        experiments, and things I'm learning.
-                    </p>
-
-                    <h3>🚀 About this repository</h3>
-                    <p>
-                        This repository is a starting point for showcasing
-                        projects and sharing ideas with the developer community.
-                    </p>
-
-                    <h3>🛠️ Technologies</h3>
-                    <p>HTML · CSS · JavaScript · Java · Git</p>
-
-                    <h3>📌 Future plans</h3>
-                    <p>
-                        More projects, improved designs, and new features
-                        will be added here.
-                    </p>
-
-                    <h3>📫 Connect with me</h3>
-                    <p>
-                        GitHub:
-                        <a href="https://github.com/kisal-prabhashwara"
-                           target="_blank" rel="noopener noreferrer">
-                            kisal-prabhashwara
-                        </a>
-                    </p>
-                </div>
-            </div>
-
-        </div>
-
-        <aside class="sidebar">
-
-            <div class="panel">
-                <div class="sidebar-section">
-                    <h3>About</h3>
-                    <p>
-                        Personal repository for projects, code, and
-                        development experiments.
-                    </p>
-                </div>
-
-                <div class="sidebar-section">
-                    <h3>📌 Repository details</h3>
-                    <p>🌐 Public repository</p>
-                    <p>📄 README available</p>
-                    <p>🌿 Main branch</p>
-                </div>
-
-                <div class="sidebar-section">
-                    <h3>💻 Languages</h3>
-                    <div class="language-bar"></div>
-                    <p>JavaScript · Java · HTML · CSS</p>
-                </div>
-
-                <div class="sidebar-section">
-                    <h3>🔗 Links</h3>
-                    <p>
-                        <a href="https://github.com/kisal-prabhashwara"
-                           style="color:#4493f8">
-                            GitHub Profile ↗
-                        </a>
-                    </p>
-                </div>
-            </div>
-
-        </aside>
-    </section>
-</main>
-
-<footer>
-    Built with HTML, CSS & JavaScript · Kisal-De-Silva
-</footer>
-
-<script>
-const buttons = [
-    { button: "starBtn", count: "starCount", label: "☆ Star", active: "★ Star" },
-    { button: "watchBtn", count: "watchCount", label: "◉ Watch", active: "◉ Watching" },
-    { button: "forkBtn", count: "forkCount", label: "⑂ Fork", active: "⑂ Forked" }
-];
-
-buttons.forEach(item => {
-    const btn = document.getElementById(item.button);
-    const count = document.getElementById(item.count);
-    let selected = false;
-
-    btn.addEventListener("click", () => {
-        selected = !selected;
-        count.textContent = selected ? "1" : "0";
-        btn.classList.toggle("selected", selected);
-        btn.childNodes[0].textContent =
-            selected ? item.active + " " : item.label + " ";
-    });
-});
-</script>
-
-</body>
-</html>
+<!-- Matrix rain header via SVG -->
+<img src="https://capsule-render.vercel.app/api?type=venom&height=200&text=HESHAN%20KAVINDU&fontSize=60&fontColor=2B59FF&fontStyle=Inter&fontWeight=800&color=0:000000,100:4169E1&stroke=4169E1&strokeWidth=1&animation=twinkling&desc=FULL%20STACK%20DEV%20%7C%20CYBERSECURITY%20ENTHUSIAST&descSize=16&descAlignY=78&descColor=FFFFFF" width="100%"/>
+
+<!-- Typing animation -->
+<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=20&pause=1000&color=00FF41&center=true&vCenter=true&repeat=true&width=600&height=40&lines=Full+Stack+Developer+%F0%9F%9A%80;Cybersecurity+Enthusiast+%F0%9F%94%90;Undergraduate+Software+Engineer+%F0%9F%8E%93;Building+Secure+%26+Scalable+Systems+%E2%9A%99%EF%B8%8F;break+things+ethically.+build+things+securely." alt="Typing SVG"/>
+
+<!-- Badges -->
+<p>
+  <img src="https://img.shields.io/badge/Focus-Full_Stack_Development-00ff41?style=flat-square&labelColor=0d1117&color=00ff41"/>
+  <img src="https://img.shields.io/badge/Interest-Cybersecurity-f85149?style=flat-square&labelColor=0d1117&color=f85149"/>
+  <img src="https://img.shields.io/badge/Based_In-Sri_Lanka_🇱🇰-388bfd?style=flat-square&labelColor=0d1117&color=388bfd"/>
+</p>
+
+</div>
+
+---
+
+```bash
+┌──(heshan㉿dev)-[~]
+└─$ cat about_me.sh
+```
+
+```javascript
+const heshan = {
+  name     : "Heshan Kavindu Dhanawardhana",
+  role     : "Undergraduate Software Engineer",
+  focus    : ["Full Stack Development", "Cybersecurity"],
+  location : "Sri Lanka 🇱🇰",
+  learning : ["Cloud Architecture", "Ethical Hacking", "System Design"],
+  openTo   : ["Collaborations", "Open Source", "Internships"],
+  motto    : "Break things ethically. Build things securely.",
+  coffee   : "████████████████ 100%"
+};
+```
+
+---
+
+<img src="https://capsule-render.vercel.app/api?type=rect&color=0:0d1117,100:161b22&height=2&section=header" width="100%"/>
+
+## ⚡ Tech Arsenal
+
+<div align="center">
+
+### 🌐 Frontend
+![HTML5](https://img.shields.io/badge/HTML5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/CSS3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-%23F7DF1E.svg?style=for-the-badge&logo=javascript&logoColor=black)
+![TypeScript](https://img.shields.io/badge/TypeScript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)
+![React](https://img.shields.io/badge/React-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
+![Next JS](https://img.shields.io/badge/Next.js-black?style=for-the-badge&logo=next.js&logoColor=white)
+![TailwindCSS](https://img.shields.io/badge/Tailwind-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white)
+
+### ⚙️ Backend
+![NodeJS](https://img.shields.io/badge/Node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)
+![Express.js](https://img.shields.io/badge/Express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB)
+![Java](https://img.shields.io/badge/Java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white)
+![Spring](https://img.shields.io/badge/Spring-%236DB33F.svg?style=for-the-badge&logo=spring&logoColor=white)
+![Python](https://img.shields.io/badge/Python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
+
+### 🗄️ Database & Cloud
+![MySQL](https://img.shields.io/badge/MySQL-%2300f.svg?style=for-the-badge&logo=mysql&logoColor=white)
+![MongoDB](https://img.shields.io/badge/MongoDB-%234ea94b.svg?style=for-the-badge&logo=mongodb&logoColor=white)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white)
+![Redis](https://img.shields.io/badge/Redis-%23DD0031.svg?style=for-the-badge&logo=redis&logoColor=white)
+![Docker](https://img.shields.io/badge/Docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)
+
+### 🔐 Cybersecurity
+![Kali](https://img.shields.io/badge/Kali_Linux-557C94?style=for-the-badge&logo=kali-linux&logoColor=white)
+![Linux](https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black)
+![Wireshark](https://img.shields.io/badge/Wireshark-1679A7?style=for-the-badge&logo=wireshark&logoColor=white)
+![Burp Suite](https://img.shields.io/badge/Burp_Suite-FF6633?style=for-the-badge&logo=burp-suite&logoColor=white)
+
+</div>
+
+---
+
+## 📊 Stats & Activity
+
+<div align="center">
+
+<img height="160" src="https://github-readme-stats.vercel.app/api?username=Heshan-Dhane&show_icons=true&theme=github_dark&hide_border=true&bg_color=0d1117&title_color=00ff41&icon_color=00ff41&text_color=c9d1d9&ring_color=00ff41" />
+<img height="160" src="https://github-readme-stats.vercel.app/api/top-langs/?username=Heshan-Dhane&layout=compact&theme=github_dark&hide_border=true&bg_color=0d1117&title_color=00ff41&text_color=c9d1d9" />
+
+</div>
+
+<div align="center">
+
+[![GitHub Streak](https://streak-stats.demolab.com?user=Heshan-Dhane&theme=matrix&hide_border=true&background=0D1117&fire=00FF41&ring=00FF41&currStreakLabel=00FF41&sideLabels=7d8590&dates=7d8590&currStreakNum=00ff41&sideNums=c9d1d9)](https://git.io/streak-stats)
+
+</div>
+
+<div align="center">
+
+[![activity graph](https://github-readme-activity-graph.vercel.app/graph?username=Heshan-Dhane&bg_color=0d1117&color=00ff41&line=00ff41&point=ffffff&area_color=006400&area=true&hide_border=true&custom_title=Contribution%20Graph)](https://github.com/ashutosh00710/github-readme-activity-graph)
+
+</div>
+
+---
+
+## 🔐 Cybersecurity Focus
+
+```
+╔═══════════════════════════════════════════════════════════════╗
+║                                                               ║
+║   🕵️  Penetration Testing & Ethical Hacking                  ║
+║   🌐  Web Application Security  (OWASP Top 10)               ║
+║   🔍  Network Scanning & Traffic Analysis                     ║
+║   🛡️  Vulnerability Assessment & Reporting                   ║
+║   🔒  Cryptography & Secure Coding Practices                  ║
+║   💀  CTF Challenges  &  Bug Bounty Hunting                   ║
+║                                                               ║
+╚═══════════════════════════════════════════════════════════════╝
+```
+
+---
+
+## 🌐 Connect
+
+<div align="center">
+
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/YOUR_LINKEDIN)
+[![Twitter](https://img.shields.io/badge/Twitter-%231DA1F2.svg?style=for-the-badge&logo=Twitter&logoColor=white)](https://twitter.com/YOUR_TWITTER)
+[![Gmail](https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:dhanawardhanaheshan@gmail.com)
+[![Portfolio](https://img.shields.io/badge/Portfolio-00FF41?style=for-the-badge&logo=firefox&logoColor=black)](https://YOUR_PORTFOLIO)
+[![Discord](https://img.shields.io/badge/Discord-%235865F2.svg?style=for-the-badge&logo=discord&logoColor=white)](https://discord.com/users/orion_pax1.0)
+
+</div>
+
+---
+
+<div align="center">
+
+```
+> "Security is not a product, but a process." — Bruce Schneier
+```
+
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:000000,100:4169E1&height=100&section=footer&reversal=true" width="100%"/>
+
+</div>
